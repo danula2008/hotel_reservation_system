@@ -2,7 +2,7 @@ package edu.icet.pms.controller;
 
 import edu.icet.pms.dto.Customer;
 import edu.icet.pms.service.CustomerService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,14 +10,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CustomerController {
     private final CustomerService service;
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public String addCustomer(@RequestBody Customer customer){
-        return String.format("Hall successfully saved with ID: %s.", service.addCustomer(customer));
+        return String.format("Customer successfully saved with ID: %s.", service.addCustomer(customer));
     }
 
     @PutMapping("/update")

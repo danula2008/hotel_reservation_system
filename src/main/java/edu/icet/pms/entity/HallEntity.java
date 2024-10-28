@@ -16,9 +16,9 @@ import org.hibernate.annotations.Parameter;
 @Table(name = "Hall")
 public class HallEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "room-id-generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "hall-id-generator")
     @GenericGenerator(
-            name = "room-id-generator",
+            name = "hall-id-generator",
             parameters = @Parameter(name = "prefix", value = "H"),
             strategy = "edu.icet.pms.util.IdGenerator"
     )
