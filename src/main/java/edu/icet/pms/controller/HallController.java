@@ -22,14 +22,16 @@ public class HallController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void updateHall(@RequestBody Hall hall){
+    public String updateHall(@RequestBody Hall hall){
         service.addHall(hall);
+        return "Hall successfully updated.";
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void deleteHall(@PathVariable String id){
+    public String deleteHall(@PathVariable String id){
         service.deleteHall(id);
+        return "Hall successfully deleted.";
     }
 
     @GetMapping("/get/all")

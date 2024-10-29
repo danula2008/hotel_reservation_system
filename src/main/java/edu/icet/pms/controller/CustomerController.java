@@ -22,14 +22,16 @@ public class CustomerController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public void updateCustomer(@RequestBody Customer customer){
+    public String updateCustomer(@RequestBody Customer customer){
         service.addCustomer(customer);
+        return "Customer successfully updated.";
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void deleteCustomer(@PathVariable String id){
+    public String deleteCustomer(@PathVariable String id){
         service.deleteCustomer(id);
+        return "Customer successfully deleted.";
     }
 
     @GetMapping("/get/all")

@@ -1,12 +1,10 @@
 package edu.icet.pms.controller;
 
 import edu.icet.pms.dto.DayOutPackage;
-import edu.icet.pms.dto.Hall;
 import edu.icet.pms.service.DayOutPackageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -24,14 +22,16 @@ public class DayOutPackageController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void updateDop(@RequestBody DayOutPackage dop){
+    public String updateDop(@RequestBody DayOutPackage dop){
         service.addDop(dop);
+        return "Day Out Package successfully updated.";
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void deleteDop(@PathVariable String id){
+    public String deleteDop(@PathVariable String id){
         service.deleteDop(id);
+        return "Day Out Package successfully deleted.";
     }
 
     @GetMapping("/get/all")

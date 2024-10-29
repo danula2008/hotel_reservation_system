@@ -21,14 +21,16 @@ public class RoomController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void updateRoom(@RequestBody Room room){
+    public String updateRoom(@RequestBody Room room){
         service.addRoom(room);
+        return "Room successfully updated.";
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void deleteRoom(@PathVariable String id){
+    public String deleteRoom(@PathVariable String id){
         service.deleteRoom(id);
+        return "Room successfully deleted.";
     }
 
     @GetMapping("/get/all")

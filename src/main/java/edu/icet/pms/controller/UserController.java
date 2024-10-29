@@ -23,14 +23,16 @@ public class UserController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public void updateUser(@RequestBody User user){
+    public String updateUser(@RequestBody User user){
         service.addUser(user);
+        return "User successfully updated.";
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void deleteUser(@PathVariable String id){
+    public String deleteUser(@PathVariable String id){
         service.deleteUser(id);
+        return "User successfully deleted.";
     }
 
     @GetMapping("/get/all")
