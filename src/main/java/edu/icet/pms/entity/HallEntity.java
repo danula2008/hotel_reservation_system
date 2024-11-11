@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import java.sql.Blob;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -23,14 +25,17 @@ public class HallEntity {
             strategy = "edu.icet.pms.util.IdGenerator"
     )
     private String id;
-    private Integer capacity;
     private String name;
-    private Double price;
     private String description;
+    private String type;
+    private Integer capacity;
+    private Double price;
     private String availEquip;
     private Boolean internetAccess;
     private Boolean climateControl;
     private String decoratorStyle;
-    private String type;
-    private String status;
+    @Lob
+    private Blob image;
+    private Integer rating;
+    private Boolean available;
 }

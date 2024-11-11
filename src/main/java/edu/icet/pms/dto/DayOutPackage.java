@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Blob;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -21,5 +23,7 @@ public class DayOutPackage {
     private String timeOfDay;
     private String foodDetails;
     private String groupSize;
-    private String status;
+    private Blob image;
+    private Integer rating;
+    private Boolean available;
 }

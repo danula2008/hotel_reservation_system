@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface DopReservationDao extends JpaRepository<DopReservationEntity, DopReservationPK> {
-    List<DopReservationEntity> findByReservationId(String id);
+    DopReservationEntity findByReservationId(String id);
     List<DopReservationEntity> findByDopId(String dopId);
     List<DopReservationEntity> findByDate(LocalDate date);
 }

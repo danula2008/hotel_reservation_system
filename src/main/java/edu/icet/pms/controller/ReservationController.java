@@ -1,6 +1,7 @@
 package edu.icet.pms.controller;
 
 import edu.icet.pms.dto.Reservation;
+import edu.icet.pms.dto.Room;
 import edu.icet.pms.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -47,21 +48,15 @@ public class ReservationController {
         return service.getReservationById(id);
     }
 
-    @GetMapping("/get/customer-id/{customerId}")
+    @GetMapping("/get")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<Reservation> getReservationsByCustomerID(@PathVariable String customerId){
-        return service.getReservationsByCustomerID(customerId);
-    }
-
-    @GetMapping("/get/status/{status}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Reservation> getReservationsByStatus(@PathVariable String status){
-        return service.getReservationsByStatus(status);
-    }
-
-    @GetMapping("/get/payment-method/{paymentMethod}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Reservation> getReservationsByPaymentMethod(@PathVariable String paymentMethod){
-        return service.getReservationsByPaymentMethod(paymentMethod);
+    public List<Room> getReservationsByFiltering(@RequestParam(required = false) String status,
+                                                 @RequestParam(required = false) String customerId,
+                                                 @RequestParam(required = false) String paymentCompleted
+    ){
+        return service.getReservationsByFiltering(
+                status,
+                customerId,
+                paymentCompleted == null? null : Boolean.parseBoolean(paymentCompleted));
     }
 }

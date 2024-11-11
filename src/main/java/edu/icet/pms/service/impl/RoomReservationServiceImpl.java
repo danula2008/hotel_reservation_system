@@ -35,22 +35,12 @@ public class RoomReservationServiceImpl implements RoomReservationService {
     }
 
     @Override
-    public List<RoomReservation> getRoomReservationByReservationId(String id) {
-        return repository.findByReservationId(id).stream().map(roomReservationEntity -> mapper.map(roomReservationEntity, RoomReservation.class)).toList();
+    public RoomReservation getRoomReservationByReservationId(String id) {
+        return mapper.map(repository.findByReservationId(id), RoomReservation.class);
     }
 
     @Override
     public List<RoomReservation> getRoomReservationByRoomId(String roomId) {
         return repository.findByRoomId(roomId).stream().map(roomReservationEntity -> mapper.map(roomReservationEntity, RoomReservation.class)).toList();
-    }
-
-    @Override
-    public List<RoomReservation> getRoomReservationByArrivalDate(LocalDate date) {
-        return repository.findByArrivalDate(date).stream().map(roomReservationEntity -> mapper.map(roomReservationEntity, RoomReservation.class)).toList();
-    }
-
-    @Override
-    public List<RoomReservation> getRoomReservationByDepartureDate(LocalDate date) {
-        return repository.findByDepartureDate(date).stream().map(roomReservationEntity -> mapper.map(roomReservationEntity, RoomReservation.class)).toList();
     }
 }

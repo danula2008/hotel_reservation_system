@@ -4,10 +4,15 @@ import edu.icet.pms.dao.HallDao;
 import edu.icet.pms.dto.Hall;
 import edu.icet.pms.entity.HallEntity;
 import edu.icet.pms.service.HallService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +21,7 @@ public class HallServiceImpl implements HallService {
 
     private final HallDao repository;
     private final ModelMapper mapper;
+    private final EntityManager entityManager;
 
     @Override
     public String addHall(Hall hall) {
@@ -38,32 +44,38 @@ public class HallServiceImpl implements HallService {
     }
 
     @Override
-    public List<Hall> getHallsByCapacity(Integer capacity) {
-        return repository.findByCapacity(capacity).stream().map(hallEntity -> mapper.map(hallEntity, Hall.class)).toList();
-    }
+    public List<Hall> getHallsByFiltering(String type, Integer capacity, Boolean internetAccess, Boolean climateControl, Boolean decoratorStyle, Integer rating, Boolean available) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<HallEntity> criteriaQuery = criteriaBuilder.createQuery(HallEntity.class);
+        Root<HallEntity> root = criteriaQuery.from(HallEntity.class);
+        List<Predicate> predicates = new ArrayList<>();
 
-    @Override
-    public List<Hall> getHallsByInternetAccess(Boolean internetAccess) {
-        return repository.findByInternetAccess(internetAccess).stream().map(hallEntity -> mapper.map(hallEntity, Hall.class)).toList();
-    }
+        if (type != null) {
+            predicates.add(criteriaBuilder.equal(root.get("type"), type));
+        }
+        if (capacity != null) {
+            predicates.add(criteriaBuilder.equal(root.get("capacity"), capacity));
+        }
+        if (internetAccess != null) {
+            predicates.add(criteriaBuilder.equal(root.get("internetAccess"), internetAccess));
+        }
+        if (climateControl != null) {
+            predicates.add(criteriaBuilder.equal(root.get("climateControl"), climateControl));
+        }
+        if (decoratorStyle != null) {
+            predicates.add(criteriaBuilder.equal(root.get("decoratorStyle"), decoratorStyle));
+        }
+        if (rating != null) {
+            predicates.add(criteriaBuilder.equal(root.get("rating"), rating));
+        }
+        if (available != null) {
+            predicates.add(criteriaBuilder.equal(root.get("available"), available));
+        }
 
-    @Override
-    public List<Hall> getHallsByClimateControl(Boolean climateControl) {
-        return repository.findByClimateControl(climateControl).stream().map(hallEntity -> mapper.map(hallEntity, Hall.class)).toList();
-    }
+        if (!predicates.isEmpty()) {
+            criteriaQuery.where(criteriaBuilder.and(predicates.toArray(new Predicate[0])));
+        }
+        return entityManager.createQuery(criteriaQuery).getResultList().stream().map(hallEntity -> mapper.map(hallEntity, Hall.class)).toList();
 
-    @Override
-    public List<Hall> getHallsByDecoratorStyle(String decoratorStyle) {
-        return repository.findByDecoratorStyle(decoratorStyle).stream().map(hallEntity -> mapper.map(hallEntity, Hall.class)).toList();
-    }
-
-    @Override
-    public List<Hall> getHallsByType(String type) {
-        return repository.findByType(type).stream().map(hallEntity -> mapper.map(hallEntity, Hall.class)).toList();
-    }
-
-    @Override
-    public List<Hall> getHallsByStatus(String status) {
-        return repository.findByStatus(status).stream().map(hallEntity -> mapper.map(hallEntity, Hall.class)).toList();
     }
 }

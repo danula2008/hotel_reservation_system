@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Blob;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -13,12 +15,15 @@ public class Room {
     private String id;
     private String type;
     private String name;
+    private String description;
     private Integer capacity;
-    private Double price;
     private String features;
+    private Double price;
     private String bedType;
     private String view;
     private Boolean internetAccess;
     private Boolean television;
-    private String status;
+    private Blob image;
+    private Integer rating;
+    private Boolean available;
 }

@@ -45,7 +45,7 @@ public class HallReservationController {
 
     @GetMapping("/get/id/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<HallReservation> getHallReservationById(@PathVariable String id){
+    public HallReservation getHallReservationById(@PathVariable String id){
         return service.getHallReservationByReservationId(id);
     }
 
@@ -53,17 +53,5 @@ public class HallReservationController {
     @ResponseStatus(HttpStatus.FOUND)
     public List<HallReservation> getHallReservationByHallId(@PathVariable String hallId){
         return service.getHallReservationByHallId(hallId);
-    }
-
-    @GetMapping("/get/starting-date/{date}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<HallReservation> getHallReservationByStartingDate(@PathVariable String date){
-        return service.getHallReservationByStartingDate(LocalDate.parse(date));
-    }
-
-    @GetMapping("/get/ending-date/{date}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<HallReservation> getHallReservationByEndingDate(@PathVariable String date){
-        return service.getHallReservationByEndingDate(LocalDate.parse(date));
     }
 }

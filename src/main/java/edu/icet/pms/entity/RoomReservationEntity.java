@@ -22,8 +22,5 @@ public class RoomReservationEntity {
     @Id
     private String roomId;
     private LocalDate arrivalDate;
-    private String arrivalSession;
     private LocalDate departureDate;
-    private String departureSession;
-    private String specialRequests;
 }

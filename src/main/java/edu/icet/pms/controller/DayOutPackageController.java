@@ -2,10 +2,12 @@ package edu.icet.pms.controller;
 
 import edu.icet.pms.dto.DayOutPackage;
 import edu.icet.pms.service.DayOutPackageService;
+import edu.icet.pms.util.ResponseMapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/dop")
@@ -14,24 +16,24 @@ public class DayOutPackageController {
 
     private final DayOutPackageService service;
 
-    @PostMapping("/add")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String addDop(@RequestBody DayOutPackage dop){
-        return String.format("Day Out Package successfully saved with ID: %s.", service.addDop(dop));
+    public Map<String, String> addDop(@RequestBody DayOutPackage dop){
+        return ResponseMapping.getMapping(("Day Out Package successfully saved with ID: %s.".formatted(service.addDop(dop))));
     }
 
-    @PutMapping("/update")
+    @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public String updateDop(@RequestBody DayOutPackage dop){
+    public Map<String, String> updateDop(@RequestBody DayOutPackage dop){
         service.addDop(dop);
-        return "Day Out Package successfully updated.";
+        return ResponseMapping.getMapping("Day Out Package successfully updated.");
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/id/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public String deleteDop(@PathVariable String id){
+    public Map<String, String> deleteDop(@PathVariable String id){
         service.deleteDop(id);
-        return "Day Out Package successfully deleted.";
+        return ResponseMapping.getMapping("Day Out Package successfully deleted.");
     }
 
     @GetMapping("/get/all")
@@ -46,21 +48,15 @@ public class DayOutPackageController {
         return service.getDopById(id);
     }
 
-    @GetMapping("/get/duration/{duration}")
+    @GetMapping("/get")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<DayOutPackage> getDopByDuration(@PathVariable String duration){
-        return service.getDopByDuration(duration);
-    }
-
-    @GetMapping("/get/time-of-day/{timeOfDay}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<DayOutPackage> getDopByTimeOfDay(@PathVariable String timeOfDay){
-        return service.getDopByTimeOfDay(timeOfDay);
-    }
-
-    @GetMapping("/get/status/{status}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<DayOutPackage> getDopByStatus(@PathVariable String status){
-        return service.getDopByStatus(status);
+    public List<DayOutPackage> getDopByFiltering(@RequestParam(required = false) String duration,
+                                                @RequestParam(required = false) String timeOfDay,
+                                                @RequestParam(required = false) String rating,
+                                                @RequestParam(required = false) String available){
+        return service.getDopByFiltering(duration,
+                timeOfDay,
+                rating==null? null : Integer.parseInt(rating),
+                available==null? null : Boolean.parseBoolean(available));
     }
 }

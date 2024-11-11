@@ -35,22 +35,12 @@ public class HallReservationServiceImpl implements HallReservationService {
     }
 
     @Override
-    public List<HallReservation> getHallReservationByReservationId(String id) {
-        return repository.findByReservationId(id).stream().map(hallReservationEntity -> mapper.map(hallReservationEntity, HallReservation.class)).toList();
+    public HallReservation getHallReservationByReservationId(String id) {
+        return mapper.map(repository.findByReservationId(id), HallReservation.class);
     }
 
     @Override
     public List<HallReservation> getHallReservationByHallId(String hallId) {
         return repository.findByHallId(hallId).stream().map(hallReservationEntity -> mapper.map(hallReservationEntity, HallReservation.class)).toList();
-    }
-
-    @Override
-    public List<HallReservation> getHallReservationByStartingDate(LocalDate date) {
-        return repository.findByStartingDate(date).stream().map(hallReservationEntity -> mapper.map(hallReservationEntity, HallReservation.class)).toList();
-    }
-
-    @Override
-    public List<HallReservation> getHallReservationByEndingDate(LocalDate date) {
-        return repository.findByEndingDate(date).stream().map(hallReservationEntity -> mapper.map(hallReservationEntity, HallReservation.class)).toList();
     }
 }

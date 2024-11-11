@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.sql.Blob;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -32,5 +34,8 @@ public class DayOutPackageEntity {
     private String timeOfDay;
     private String foodDetails;
     private String groupSize;
-    private String status;
+    @Lob
+    private Blob image;
+    private Integer rating;
+    private Boolean available;
 }

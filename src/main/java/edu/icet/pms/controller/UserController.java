@@ -15,20 +15,20 @@ public class UserController {
 
     private final UserService service;
 
-    @PostMapping("/add")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public String addUser(@RequestBody User user){
         return String.format("User successfully saved with ID: %s.", service.addUser(user));
     }
 
-    @PutMapping("/update")
+    @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
     public String updateUser(@RequestBody User user){
         service.addUser(user);
         return "User successfully updated.";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public String deleteUser(@PathVariable String id){
         service.deleteUser(id);
@@ -59,9 +59,9 @@ public class UserController {
         return service.getUserByEmail(email);
     }
 
-    @GetMapping("/get/role/{role}")
+    @GetMapping("/get")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<User> getUserByRole(@PathVariable String role){
+    public List<User> getUserByRole(@RequestParam String role){
         return service.getUserByRole(role);
     }
 }

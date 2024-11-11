@@ -10,7 +10,6 @@ import java.io.Serializable;
 @Setter
 @Getter
 @EqualsAndHashCode
-
 public class HallReservationPK implements Serializable {
     private String hallId;
     private String reservationId;

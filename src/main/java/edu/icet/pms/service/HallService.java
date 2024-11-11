@@ -9,10 +9,5 @@ public interface HallService {
     void deleteHall(String id);
     List<Hall> getAllHalls();
     Hall getHallById(String id);
-    List<Hall> getHallsByCapacity(Integer capacity);
-    List<Hall> getHallsByInternetAccess(Boolean internetAccess);
-    List<Hall> getHallsByClimateControl(Boolean climateControl);
-    List<Hall> getHallsByDecoratorStyle(String decoratorStyle);
-    List<Hall> getHallsByType(String type);
-    List<Hall> getHallsByStatus(String status);
+    List<Hall> getHallsByFiltering(String type, Integer capacity, Boolean internetAccess, Boolean climateControl, Boolean decoratorStyle, Integer rating, Boolean available);
 }

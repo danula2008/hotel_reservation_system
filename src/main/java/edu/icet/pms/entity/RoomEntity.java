@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import java.sql.Blob;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -25,12 +27,16 @@ public class RoomEntity {
     private String id;
     private String type;
     private String name;
+    private String description;
     private Integer capacity;
-    private Double price;
     private String features;
+    private Double price;
     private String bedType;
     private String view;
     private Boolean internetAccess;
     private Boolean television;
-    private String status;
+    @Lob
+    private Blob image;
+    private Integer rating;
+    private Boolean available;
 }

@@ -46,7 +46,7 @@ public class RoomReservationController {
 
     @GetMapping("/get/id/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<RoomReservation> getRoomReservationById(@PathVariable String id){
+    public RoomReservation getRoomReservationById(@PathVariable String id){
         return service.getRoomReservationByReservationId(id);
     }
 
@@ -54,17 +54,5 @@ public class RoomReservationController {
     @ResponseStatus(HttpStatus.FOUND)
     public List<RoomReservation> getRoomReservationByRoomId(@PathVariable String roomId){
         return service.getRoomReservationByRoomId(roomId);
-    }
-
-    @GetMapping("/get/arrival-date/{date}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<RoomReservation> getRoomReservationByArrivalDate(@PathVariable String date){
-        return service.getRoomReservationByArrivalDate(LocalDate.parse(date));
-    }
-
-    @GetMapping("/get/departure-date/{date}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<RoomReservation> getRoomReservationByDepartureDate(@PathVariable String date){
-        return service.getRoomReservationByDepartureDate(LocalDate.parse(date));
     }
 }

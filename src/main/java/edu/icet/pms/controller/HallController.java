@@ -2,10 +2,12 @@ package edu.icet.pms.controller;
 
 import edu.icet.pms.dto.Hall;
 import edu.icet.pms.service.HallService;
+import edu.icet.pms.util.ResponseMapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/hall")
@@ -14,71 +16,54 @@ public class HallController {
 
     private final HallService service;
 
-    @PostMapping("/add")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String addHall(@RequestBody Hall hall){
-        return String.format("Hall successfully saved with ID: %s.", service.addHall(hall));
+    public Map<String, String> addHall(@RequestBody Hall hall) {
+        return ResponseMapping.getMapping("Hall successfully saved with ID: %s.".formatted(service.addHall(hall)));
     }
 
-    @PutMapping("/update")
+    @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public String updateHall(@RequestBody Hall hall){
+    public Map<String, String> updateHall(@RequestBody Hall hall) {
         service.addHall(hall);
-        return "Hall successfully updated.";
+        return ResponseMapping.getMapping("Hall successfully updated.");
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public String deleteHall(@PathVariable String id){
+    public Map<String, String> deleteHall(@PathVariable String id) {
         service.deleteHall(id);
-        return "Hall successfully deleted.";
+        return ResponseMapping.getMapping("Hall successfully deleted.");
     }
 
     @GetMapping("/get/all")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<Hall> getAllHalls(){
+    public List<Hall> getAllHalls() {
         return service.getAllHalls();
     }
 
     @GetMapping("/get/id/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public Hall getHallById(@PathVariable String id){
+    public Hall getHallById(@PathVariable String id) {
         return service.getHallById(id);
     }
 
-    @GetMapping("/get/type/{type}")
+    @GetMapping("/get")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<Hall> getHallsByType(@PathVariable String type){
-        return service.getHallsByType(type);
-    }
-
-    @GetMapping("/get/capacity/{capacity}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Hall> getHallsByCapacity(@PathVariable Integer capacity){
-        return service.getHallsByCapacity(capacity);
-    }
-
-    @GetMapping("/get/internet/{internetAccess}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Hall> getHallsByInternetAccess(@PathVariable Boolean internetAccess){
-        return service.getHallsByInternetAccess(internetAccess);
-    }
-
-    @GetMapping("/get/climate-control/{climateControl}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Hall> getHallsByClimateControl(@PathVariable Boolean climateControl){
-        return service.getHallsByClimateControl(climateControl);
-    }
-
-    @GetMapping("/get/decorator-style/{decoratorStyle}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Hall> getHallsByDecoratorStyle(@PathVariable String decoratorStyle){
-        return service.getHallsByDecoratorStyle(decoratorStyle);
-    }
-
-    @GetMapping("/get/status/{status}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Hall> getHallsByStatus(@PathVariable String status){
-        return service.getHallsByStatus(status);
+    public List<Hall> getHallsByFiltering(@RequestParam(required = false) String type,
+                                     @RequestParam(required = false) String capacity,
+                                     @RequestParam(required = false) String internetAccess,
+                                     @RequestParam(required = false) String climateControl,
+                                     @RequestParam(required = false) String decoratorStyle,
+                                     @RequestParam(required = false) String rating,
+                                     @RequestParam(required = false) String available
+    ) {
+        return service.getHallsByFiltering(type,
+                capacity == null? null : Integer.getInteger(capacity),
+                internetAccess == null? null : Boolean.parseBoolean(internetAccess),
+                climateControl == null? null : Boolean.parseBoolean(climateControl),
+                decoratorStyle == null? null : Boolean.parseBoolean(decoratorStyle),
+                rating == null? null : Integer.parseInt(rating),
+                available == null? null : Boolean.parseBoolean(available));
     }
 }

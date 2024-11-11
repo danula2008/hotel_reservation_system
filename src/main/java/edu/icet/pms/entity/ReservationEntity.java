@@ -26,9 +26,9 @@ public class ReservationEntity {
     private String id;
     private String customerId;
     private Double totPrice;
-    private Double discount;
     private String status;
     private Integer noMembers;
-    private String paymentMethod;
+    private Boolean paymentCompleted;
     private LocalDateTime createdDateTime;
+    private String specialRequests;
 }

@@ -4,10 +4,16 @@ import edu.icet.pms.dao.RoomDao;
 import edu.icet.pms.dto.Room;
 import edu.icet.pms.entity.RoomEntity;
 import edu.icet.pms.service.RoomService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +22,7 @@ public class RoomServiceImpl implements RoomService {
 
     private final RoomDao repository;
     private final ModelMapper mapper;
+    private final EntityManager entityManager;
 
     @Override
     public String addRoom(Room room) {
@@ -38,37 +45,39 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Room> getRoomsByType(String type) {
-        return repository.findByType(type).stream().map(roomEntity -> mapper.map(roomEntity, Room.class)).toList();
-    }
+    public List<Room> getRoomsByFiltering(String type, Integer capacity, String bedType, String view, Boolean internetAccess, Boolean television, Integer rating, Boolean available) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<RoomEntity> criteriaQuery = criteriaBuilder.createQuery(RoomEntity.class);
+        Root<RoomEntity> root = criteriaQuery.from(RoomEntity.class);
 
-    @Override
-    public List<Room> getRoomsByCapacity(Integer capacity) {
-        return repository.findByCapacity(capacity).stream().map(roomEntity -> mapper.map(roomEntity, Room.class)).toList();
-    }
+        List<Predicate> predicates = new ArrayList<>();
 
-    @Override
-    public List<Room> getRoomsByBedType(String bedType) {
-        return repository.findByBedType(bedType).stream().map(roomEntity -> mapper.map(roomEntity, Room.class)).toList();
-    }
+        if (type != null) {
+            predicates.add(criteriaBuilder.equal(root.get("type"), type));
+        }
+        if (capacity != null) {
+            predicates.add(criteriaBuilder.equal(root.get("capacity"), capacity));
+        }
+        if (bedType != null) {
+            predicates.add(criteriaBuilder.equal(root.get("bedType"), bedType));
+        }
+        if (view != null) {
+            predicates.add(criteriaBuilder.equal(root.get("view"), view));
+        }
+        if (internetAccess != null) {
+            predicates.add(criteriaBuilder.equal(root.get("internetAccess"), internetAccess));
+        }
+        if (television != null) {
+            predicates.add(criteriaBuilder.equal(root.get("television"), television));
+        }
+        if (rating != null) {
+            predicates.add(criteriaBuilder.equal(root.get("rating"), rating));
+        }
+        if (available != null) {
+            predicates.add(criteriaBuilder.equal(root.get("available"), available));
+        }
 
-    @Override
-    public List<Room> getRoomsByView(String view) {
-        return repository.findByView(view).stream().map(roomEntity -> mapper.map(roomEntity, Room.class)).toList();
-    }
-
-    @Override
-    public List<Room> getRoomsByInternetAccess(Boolean internetAccess) {
-        return repository.findByInternetAccess(internetAccess).stream().map(roomEntity -> mapper.map(roomEntity, Room.class)).toList();
-    }
-
-    @Override
-    public List<Room> getRoomsByTelevision(Boolean television) {
-        return repository.findByTelevision(television).stream().map(roomEntity -> mapper.map(roomEntity, Room.class)).toList();
-    }
-
-    @Override
-    public List<Room> getRoomsByStatus(String status) {
-        return repository.findByStatus(status).stream().map(roomEntity -> mapper.map(roomEntity, Room.class)).toList();
+        criteriaQuery.where(criteriaBuilder.and(predicates.toArray(new Predicate[0])));
+        return entityManager.createQuery(criteriaQuery).getResultList().stream().map(roomEntity -> mapper.map(roomEntity, Room.class)).toList();
     }
 }

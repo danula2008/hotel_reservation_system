@@ -13,20 +13,20 @@ import java.util.List;
 public class RoomController {
     private final RoomService service;
 
-    @PostMapping("/add")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public String addRoom(@RequestBody Room room){
         return String.format("Room successfully saved with ID: %s.", service.addRoom(room));
     }
 
-    @PutMapping("/update")
+    @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     public String updateRoom(@RequestBody Room room){
         service.addRoom(room);
         return "Room successfully updated.";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public String deleteRoom(@PathVariable String id){
         service.deleteRoom(id);
@@ -45,45 +45,24 @@ public class RoomController {
         return service.getRoomById(id);
     }
 
-    @GetMapping("/get/type/{type}")
+    @GetMapping("/get")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<Room> getRoomsByType(@PathVariable String type){
-        return service.getRoomsByType(type);
-    }
-
-    @GetMapping("/get/capacity/{capacity}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Room> getRoomsByCapacity(@PathVariable Integer capacity){
-        return service.getRoomsByCapacity(capacity);
-    }
-
-    @GetMapping("/get/bed/{bedType}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Room> getRoomsByBedType(@PathVariable String bedType){
-        return service.getRoomsByBedType(bedType);
-    }
-
-    @GetMapping("/get/view/{view}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Room> getRoomsByView(@PathVariable String view){
-        return service.getRoomsByView(view);
-    }
-
-    @GetMapping("/get/internet/{internetAccess}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Room> getRoomsByInternetAccess(@PathVariable Boolean internetAccess){
-        return service.getRoomsByInternetAccess(internetAccess);
-    }
-
-    @GetMapping("/get/television/{television}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Room> getRoomsByTelevision(@PathVariable Boolean television){
-        return service.getRoomsByTelevision(television);
-    }
-
-    @GetMapping("/get/status/{status}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Room> getRoomsByStatus(@PathVariable String status){
-        return service.getRoomsByStatus(status);
+    public List<Room> getRoomsByFiltering(@RequestParam(required = false) String type,
+                                     @RequestParam(required = false) String capacity,
+                                     @RequestParam(required = false) String bedType,
+                                     @RequestParam(required = false) String view,
+                                     @RequestParam(required = false) String internetAccess,
+                                     @RequestParam(required = false) String television,
+                                     @RequestParam(required = false) String rating,
+                                     @RequestParam(required = false) String available
+                                     ){
+        return service.getRoomsByFiltering(type,
+                capacity == null? null : Integer.getInteger(capacity),
+                bedType,
+                view,
+                internetAccess == null? null : Boolean.parseBoolean(capacity),
+                television == null? null : Boolean.parseBoolean(television),
+                rating == null? null : Integer.parseInt(rating),
+                available == null? null : Boolean.parseBoolean(available));
     }
 }

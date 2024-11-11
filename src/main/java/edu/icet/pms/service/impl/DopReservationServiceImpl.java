@@ -35,17 +35,12 @@ public class DopReservationServiceImpl implements DopReservationService {
     }
 
     @Override
-    public List<DopReservation> getDopReservationByReservationId(String id) {
-        return repository.findByReservationId(id).stream().map(dopReservationEntity -> mapper.map(dopReservationEntity, DopReservation.class)).toList();
+    public DopReservation getDopReservationByReservationId(String id) {
+        return mapper.map(repository.findByReservationId(id), DopReservation.class);
     }
 
     @Override
     public List<DopReservation> getDopReservationByDopId(String dopId) {
         return repository.findByDopId(dopId).stream().map(dopReservationEntity -> mapper.map(dopReservationEntity, DopReservation.class)).toList();
-    }
-
-    @Override
-    public List<DopReservation> getDopReservationByStartingDate(LocalDate date) {
-        return repository.findByDate(date).stream().map(dopReservationEntity -> mapper.map(dopReservationEntity, DopReservation.class)).toList();
     }
 }

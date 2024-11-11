@@ -45,7 +45,7 @@ public class DopReservationController {
 
     @GetMapping("/get/id/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<DopReservation> getDopReservationById(@PathVariable String id){
+    public DopReservation getDopReservationById(@PathVariable String id){
         return service.getDopReservationByReservationId(id);
     }
 
@@ -53,11 +53,5 @@ public class DopReservationController {
     @ResponseStatus(HttpStatus.FOUND)
     public List<DopReservation> getDopReservationByDopId(@PathVariable String dopId){
         return service.getDopReservationByDopId(dopId);
-    }
-
-    @GetMapping("/get/date/{date}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<DopReservation> getDopReservationByStartingDate(@PathVariable String date){
-        return service.getDopReservationByStartingDate(LocalDate.parse(date));
     }
 }

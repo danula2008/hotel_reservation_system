@@ -2,11 +2,12 @@ package edu.icet.pms.controller;
 
 import edu.icet.pms.dto.Customer;
 import edu.icet.pms.service.CustomerService;
+import edu.icet.pms.util.ResponseMapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/customer")
@@ -15,24 +16,24 @@ public class CustomerController {
 
     private final CustomerService service;
 
-    @PostMapping("/add")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String addCustomer(@RequestBody Customer customer){
-        return String.format("Customer successfully saved with ID: %s.", service.addCustomer(customer));
+    public Map<String, String> addCustomer(@RequestBody Customer customer){
+        return ResponseMapping.getMapping("Customer successfully saved with ID: %s.".formatted(service.addCustomer(customer)));
     }
 
-    @PutMapping("/update")
+    @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String updateCustomer(@RequestBody Customer customer){
+    public Map<String, String> updateCustomer(@RequestBody Customer customer){
         service.addCustomer(customer);
-        return "Customer successfully updated.";
+        return ResponseMapping.getMapping("Customer successfully updated.");
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/id/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public String deleteCustomer(@PathVariable String id){
+    public Map<String, String> deleteCustomer(@PathVariable String id){
         service.deleteCustomer(id);
-        return "Customer successfully deleted.";
+        return ResponseMapping.getMapping("Customer successfully deleted.");
     }
 
     @GetMapping("/get/all")
@@ -47,16 +48,15 @@ public class CustomerController {
         return service.getCustomerById(id);
     }
 
-    @GetMapping("/get/gender/{gender}")
-    @ResponseStatus(HttpStatus.FOUND)
-    public List<Customer> getCustomersByGender(@PathVariable String gender){
-        return service.getCustomersByGender(gender);
-    }
-
-    @GetMapping("/get/user-id/{userId}")
+    @GetMapping("/get/user_id/{userId}")
     @ResponseStatus(HttpStatus.FOUND)
     public Customer getCustomersByUserId(@PathVariable String userId){
         return service.getCustomersByUserId(userId);
     }
 
+    @GetMapping("/get")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<Customer> getCustomersByGender(@RequestParam String gender){
+        return service.getCustomersByGender(gender);
+    }
 }

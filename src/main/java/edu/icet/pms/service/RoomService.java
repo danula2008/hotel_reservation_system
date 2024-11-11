@@ -9,11 +9,5 @@ public interface RoomService {
     void deleteRoom(String id);
     List<Room> getAllRooms();
     Room getRoomById(String id);
-    List<Room> getRoomsByType(String type);
-    List<Room> getRoomsByCapacity(Integer capacity);
-    List<Room> getRoomsByBedType(String bedType);
-    List<Room> getRoomsByView(String view);
-    List<Room> getRoomsByInternetAccess(Boolean internetAccess);
-    List<Room> getRoomsByTelevision(Boolean television);
-    List<Room> getRoomsByStatus(String status);
+    List<Room> getRoomsByFiltering(String type, Integer capacity, String bedType, String view, Boolean internetAccess, Boolean television, Integer rating, Boolean available);
 }

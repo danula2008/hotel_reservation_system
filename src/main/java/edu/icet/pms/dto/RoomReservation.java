@@ -11,11 +11,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoomReservation {
-    private String reservationId;
-    private String roomID;
+    private String  reservationId;
+    private String roomId;
     private LocalDate arrivalDate;
-    private String arrivalSession;
     private LocalDate departureDate;
-    private String departureSession;
-    private String specialRequests;
 }
