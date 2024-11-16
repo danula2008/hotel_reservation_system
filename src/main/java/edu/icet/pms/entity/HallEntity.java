@@ -8,8 +8,6 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-import java.sql.Blob;
-
 @Setter
 @Getter
 @AllArgsConstructor
@@ -34,8 +32,7 @@ public class HallEntity {
     private Boolean internetAccess;
     private Boolean climateControl;
     private String decoratorStyle;
-    @Lob
-    private Blob image;
+    private String image;
     private Integer rating;
     private Boolean available;
 }

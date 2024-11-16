@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Blob;
-
 @Setter
 @Getter
 @AllArgsConstructor
@@ -22,7 +20,7 @@ public class Hall {
     private Boolean internetAccess;
     private Boolean climateControl;
     private String decoratorStyle;
-    private Blob image;
+    private String image;
     private Integer rating;
     private String available;
 }

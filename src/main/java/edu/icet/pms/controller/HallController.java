@@ -12,6 +12,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/hall")
 @RequiredArgsConstructor
+@CrossOrigin
 public class HallController {
 
     private final HallService service;
@@ -37,19 +38,16 @@ public class HallController {
     }
 
     @GetMapping("/get/all")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<Hall> getAllHalls() {
         return service.getAllHalls();
     }
 
     @GetMapping("/get/id/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
     public Hall getHallById(@PathVariable String id) {
         return service.getHallById(id);
     }
 
     @GetMapping("/get")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<Hall> getHallsByFiltering(@RequestParam(required = false) String type,
                                      @RequestParam(required = false) String capacity,
                                      @RequestParam(required = false) String internetAccess,

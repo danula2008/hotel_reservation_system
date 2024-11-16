@@ -17,7 +17,7 @@ public class Customer {
     private String gender;
     private LocalDate dob;
     private String contact;
-    private String address;
+    private String country;
     private String userId;
 }
 

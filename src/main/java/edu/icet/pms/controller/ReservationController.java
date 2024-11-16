@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/reservation")
 @RequiredArgsConstructor
+@CrossOrigin
 public class ReservationController {
     
     private final ReservationService service;
@@ -37,19 +38,16 @@ public class ReservationController {
     }
 
     @GetMapping("/get/all")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<Reservation> getAllReservations(){
         return service.getAllReservations();
     }
 
     @GetMapping("/get/id/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
     public Reservation getReservationById(@PathVariable String id){
         return service.getReservationById(id);
     }
 
     @GetMapping("/get")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<Room> getReservationsByFiltering(@RequestParam(required = false) String status,
                                                  @RequestParam(required = false) String customerId,
                                                  @RequestParam(required = false) String paymentCompleted

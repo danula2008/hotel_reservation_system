@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@CrossOrigin
 public class UserController {
 
     private final UserService service;
@@ -18,7 +19,7 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public String addUser(@RequestBody User user){
-        return String.format("User successfully saved with ID: %s.", service.addUser(user));
+        return service.addUser(user);
     }
 
     @PutMapping
@@ -36,32 +37,39 @@ public class UserController {
     }
 
     @GetMapping("/get/all")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<User> getAllUsers(){
         return service.getAllUsers();
     }
 
     @GetMapping("/get/id/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
     public User getUserById(@PathVariable String id){
         return service.getUserById(id);
     }
 
     @GetMapping("/get/username/{username}")
-    @ResponseStatus(HttpStatus.FOUND)
     public User getUserByUsername(@PathVariable String username){
         return service.getUserByUsername(username);
     }
 
     @GetMapping("/get/email/{email}")
-    @ResponseStatus(HttpStatus.FOUND)
     public User getUserByEmail(@PathVariable String email){
         return service.getUserByEmail(email);
     }
 
     @GetMapping("/get")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<User> getUserByRole(@RequestParam String role){
         return service.getUserByRole(role);
+    }
+
+    @GetMapping("validate-login")
+    public User validateLogin(@RequestParam(required = false) String email,
+                             @RequestParam(required = false) String username,
+                             @RequestParam String password) {
+        return service.validateLogin(email, username, password);
+    }
+
+    @GetMapping("username-available/{username}")
+    public Boolean usernameAvailable(@PathVariable String username) {
+        return service.usernameAvailable(username);
     }
 }

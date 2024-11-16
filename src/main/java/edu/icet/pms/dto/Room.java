@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Blob;
-
 @Setter
 @Getter
 @AllArgsConstructor
@@ -23,7 +21,7 @@ public class Room {
     private String view;
     private Boolean internetAccess;
     private Boolean television;
-    private Blob image;
+    private String image;
     private Integer rating;
     private Boolean available;
 }

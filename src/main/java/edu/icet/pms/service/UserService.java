@@ -12,4 +12,6 @@ public interface UserService {
     User getUserByUsername(String username);
     User getUserByEmail(String email);
     List<User> getUserByRole(String role);
+    User validateLogin(String email, String username, String password);
+    Boolean usernameAvailable(String username);
 }

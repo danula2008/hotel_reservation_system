@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/reserve/hall")
 @RequiredArgsConstructor
+@CrossOrigin
 public class HallReservationController {
 
     private final HallReservationService service;
@@ -38,19 +39,16 @@ public class HallReservationController {
     }
 
     @GetMapping("/get/all")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<HallReservation> getAllHallReservations(){
         return service.getAllHallReservations();
     }
 
     @GetMapping("/get/id/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
     public HallReservation getHallReservationById(@PathVariable String id){
         return service.getHallReservationByReservationId(id);
     }
 
     @GetMapping("/get/hall-id/{hallId}")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<HallReservation> getHallReservationByHallId(@PathVariable String hallId){
         return service.getHallReservationByHallId(hallId);
     }

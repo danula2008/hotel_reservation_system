@@ -12,6 +12,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/dop")
 @RequiredArgsConstructor
+@CrossOrigin
 public class DayOutPackageController {
 
     private final DayOutPackageService service;
@@ -37,19 +38,16 @@ public class DayOutPackageController {
     }
 
     @GetMapping("/get/all")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<DayOutPackage> getAllDop(){
         return service.getAllDop();
     }
 
     @GetMapping("/get/id/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
     public DayOutPackage getDopById(@PathVariable String id){
         return service.getDopById(id);
     }
 
     @GetMapping("/get")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<DayOutPackage> getDopByFiltering(@RequestParam(required = false) String duration,
                                                 @RequestParam(required = false) String timeOfDay,
                                                 @RequestParam(required = false) String rating,

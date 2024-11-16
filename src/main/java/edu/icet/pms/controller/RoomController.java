@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/room")
 @RequiredArgsConstructor
+@CrossOrigin
 public class RoomController {
     private final RoomService service;
 
@@ -34,19 +35,16 @@ public class RoomController {
     }
 
     @GetMapping("/get/all")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<Room> getAllRooms(){
         return service.getAllRooms();
     }
 
     @GetMapping("/get/id/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
     public Room getRoomById(@PathVariable String id){
         return service.getRoomById(id);
     }
 
     @GetMapping("/get")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<Room> getRoomsByFiltering(@RequestParam(required = false) String type,
                                      @RequestParam(required = false) String capacity,
                                      @RequestParam(required = false) String bedType,

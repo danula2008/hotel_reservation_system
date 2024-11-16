@@ -12,6 +12,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/customer")
 @RequiredArgsConstructor
+@CrossOrigin
 public class CustomerController {
 
     private final CustomerService service;
@@ -37,25 +38,21 @@ public class CustomerController {
     }
 
     @GetMapping("/get/all")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<Customer> getAllCustomers(){
         return service.getAllCustomers();
     }
 
     @GetMapping("/get/id/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
     public Customer getCustomerById(@PathVariable String id){
         return service.getCustomerById(id);
     }
 
     @GetMapping("/get/user_id/{userId}")
-    @ResponseStatus(HttpStatus.FOUND)
     public Customer getCustomersByUserId(@PathVariable String userId){
         return service.getCustomersByUserId(userId);
     }
 
     @GetMapping("/get")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<Customer> getCustomersByGender(@RequestParam String gender){
         return service.getCustomersByGender(gender);
     }

@@ -24,8 +24,9 @@ public class UserEntity {
             strategy = "edu.icet.pms.util.IdGenerator"
     )
     private String id;
+    private String name;
     private String username;
-    private String password;
+    private byte[] password;
     private String email;
     private String role;
     private LocalDateTime dateCreated;

@@ -6,13 +6,12 @@ import edu.icet.pms.util.composite_keys.RoomReservationPK;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping("/reserve/room")
 @RequiredArgsConstructor
+@CrossOrigin
 public class RoomReservationController {
 
     private final RoomReservationService service;
@@ -39,19 +38,16 @@ public class RoomReservationController {
     }
 
     @GetMapping("/get/all")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<RoomReservation> getAllRoomReservations(){
         return service.getAllRoomReservations();
     }
 
     @GetMapping("/get/id/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
     public RoomReservation getRoomReservationById(@PathVariable String id){
         return service.getRoomReservationByReservationId(id);
     }
 
     @GetMapping("/get/room-id/{roomId}")
-    @ResponseStatus(HttpStatus.FOUND)
     public List<RoomReservation> getRoomReservationByRoomId(@PathVariable String roomId){
         return service.getRoomReservationByRoomId(roomId);
     }
