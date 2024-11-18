@@ -1,11 +1,13 @@
 package edu.icet.pms.controller;
 
 import edu.icet.pms.dto.ReservationDate;
+import edu.icet.pms.dto.ReservationDateForPost;
 import edu.icet.pms.service.ReservationDateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -18,8 +20,8 @@ public class ReservationDateController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addReservationDate(@RequestBody ReservationDate reservationDate){
-        service.addReservationDate(reservationDate);
+    public void addReservationDate(@RequestBody ReservationDateForPost reservationDateForPost){
+        service.addReservationDate(reservationDateForPost);
     }
 
     @DeleteMapping("/{reservationId}")
@@ -36,6 +38,11 @@ public class ReservationDateController {
     @GetMapping("/{resourceId}")
     public List<ReservationDate> getReservationDateResourceId(@PathVariable String resourceId){
         return service.getReservationDateResourceId(resourceId);
+    }
+
+    @GetMapping("check-availability")
+    Boolean checkAvailability(@RequestParam String resourceId, @RequestParam LocalDate[] dates){
+        return service.checkAvailability(resourceId, dates);
     }
 
     @GetMapping("/get/all")

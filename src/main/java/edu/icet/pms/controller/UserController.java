@@ -18,7 +18,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String addUser(@RequestBody User user){
+    public User addUser(@RequestBody User user){
         return service.addUser(user);
     }
 
@@ -61,11 +61,16 @@ public class UserController {
         return service.getUserByRole(role);
     }
 
-    @GetMapping("validate-login")
-    public User validateLogin(@RequestParam(required = false) String email,
-                             @RequestParam(required = false) String username,
+    @GetMapping("validate-login/email")
+    public User validateLoginByEmail(@RequestParam String email,
                              @RequestParam String password) {
-        return service.validateLogin(email, username, password);
+        return service.validateLoginByEmail(email, password);
+    }
+
+    @GetMapping("validate-login/username")
+    public User validateLoginByUsername(@RequestParam String username,
+                             @RequestParam String password) {
+        return service.validateLoginByUsername(username, password);
     }
 
     @GetMapping("username-available/{username}")

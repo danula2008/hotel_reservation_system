@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import java.time.LocalDate;
 
@@ -17,12 +18,10 @@ import java.time.LocalDate;
 @Table(name = "Customer")
 public class CustomerEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "customer-id-generator")
-    @GenericGenerator(
-            name = "customer-id-generator",
-            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "C"),
-            strategy = "edu.icet.pms.util.IdGenerator"
-    )
+    @GeneratedValue(generator = "c-generator")
+    @GenericGenerator(name = "c-generator",
+            strategy = "edu.icet.pms.util.IdGenerator",
+            parameters = @Parameter(name = "prefix", value = "C"))
     private String id;
     private String fName;
     private String lName;

@@ -15,12 +15,10 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "DayOutPackage")
 public class DayOutPackageEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "dop-id-generator")
-    @GenericGenerator(
-            name = "dop-id-generator",
-            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "DOP"),
-            strategy = "edu.icet.pms.util.IdGenerator"
-    )
+    @GeneratedValue(generator = "dop-generator")
+    @GenericGenerator(name = "dop-generator",
+            strategy = "edu.icet.pms.util.IdGenerator",
+            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "DOP"))
     private String id;
     private String name;
     private String description;

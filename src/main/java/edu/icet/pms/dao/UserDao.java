@@ -8,6 +8,6 @@ public interface UserDao extends JpaRepository<UserEntity, String> {
     UserEntity getReferenceByUsername(String username);
     UserEntity getReferenceByEmail(String email);
     List<UserEntity> findByRole(String role);
-    UserEntity findByUsernameOrEmail(String email, String username);
     UserEntity findByUsername(String username);
+    UserEntity findByEmail(String email);
 }

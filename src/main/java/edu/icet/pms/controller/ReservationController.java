@@ -20,7 +20,7 @@ public class ReservationController {
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public String addReservation(@RequestBody Reservation reservation){
-        return String.format("Reservation successfully saved with ID: %s.", service.addReservation(reservation));
+        return service.addReservation(reservation);
     }
 
     @PutMapping("/update")

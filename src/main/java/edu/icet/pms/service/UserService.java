@@ -5,13 +5,14 @@ import edu.icet.pms.dto.User;
 import java.util.List;
 
 public interface UserService {
-    String addUser(User user);
+    User addUser(User user);
     void deleteUser(String id);
     List<User> getAllUsers();
     User getUserById(String id);
     User getUserByUsername(String username);
     User getUserByEmail(String email);
     List<User> getUserByRole(String role);
-    User validateLogin(String email, String username, String password);
     Boolean usernameAvailable(String username);
+    User validateLoginByEmail(String email, String password);
+    User validateLoginByUsername(String username, String password);
 }

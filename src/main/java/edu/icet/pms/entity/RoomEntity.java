@@ -16,12 +16,10 @@ import org.hibernate.annotations.Parameter;
 @Table(name = "Room")
 public class RoomEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "room-id-generator")
-    @GenericGenerator(
-            name = "room-id-generator",
-            parameters = @Parameter(name = "prefix", value = "R"),
-            strategy = "edu.icet.pms.util.IdGenerator"
-    )
+    @GeneratedValue(generator = "r-generator")
+    @GenericGenerator(name = "r-generator",
+            strategy = "edu.icet.pms.util.IdGenerator",
+            parameters = @Parameter(name = "prefix", value = "R"))
     private String id;
     private String type;
     private String name;

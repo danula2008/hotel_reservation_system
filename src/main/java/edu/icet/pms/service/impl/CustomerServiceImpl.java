@@ -44,6 +44,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomersByUserId(String userId) {
-        return mapper.map(repository.getReferenceByUserId(userId), Customer.class);
+        return mapper.map(repository.findByUserId(userId), Customer.class);
     }
 }

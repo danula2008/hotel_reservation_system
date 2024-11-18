@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CustomerDao extends JpaRepository<CustomerEntity, String> {
     List<CustomerEntity> findByGender(String gender);
-    CustomerEntity getReferenceByUserId(String userId);
+    CustomerEntity findByUserId(String userId);
 }

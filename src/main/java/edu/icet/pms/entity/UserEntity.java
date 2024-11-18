@@ -17,12 +17,10 @@ import java.time.LocalDateTime;
 @Table(name = "User")
 public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "user-id-generator")
-    @GenericGenerator(
-            name = "user-id-generator",
-            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "U"),
-            strategy = "edu.icet.pms.util.IdGenerator"
-    )
+    @GeneratedValue(generator = "u-generator")
+    @GenericGenerator(name = "u-generator",
+            strategy = "edu.icet.pms.util.IdGenerator",
+            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "U"))
     private String id;
     private String name;
     private String username;

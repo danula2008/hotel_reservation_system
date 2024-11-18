@@ -18,10 +18,12 @@ public class UserServiceImpl implements UserService {
     private final ModelMapper mapper;
 
     @Override
-    public String addUser(User user) {
+    public User addUser(User user) {
         UserEntity userEntity = mapper.map(user, UserEntity.class);
         userEntity.setPassword(HashPassword.hashPassword(user.getPassword()));
-        return repository.save(userEntity).getId();
+        User savedUser = mapper.map(repository.save(userEntity), User.class);
+        savedUser.setPassword("");
+        return savedUser;
     }
 
     @Override
@@ -55,8 +57,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User validateLogin(String email, String username, String password) {
-        UserEntity user = repository.findByUsernameOrEmail(email, username);
+    public Boolean usernameAvailable(String username) {
+        return repository.findByUsername(username)==null;
+    }
+
+    @Override
+    public User validateLoginByEmail(String email, String password) {
+        UserEntity user = repository.findByEmail(email);
         if (user != null && HashPassword.verifyPassword(password, user.getPassword())) {
             user.setPassword(null);
             return mapper.map(user, User.class);
@@ -65,7 +72,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean usernameAvailable(String username) {
-        return repository.findByUsername(username)==null;
+    public User validateLoginByUsername(String username, String password) {
+        UserEntity user = repository.findByUsername(username);
+        if (user != null && HashPassword.verifyPassword(password, user.getPassword())) {
+            user.setPassword(null);
+            return mapper.map(user, User.class);
+        }
+        return null;
     }
 }
