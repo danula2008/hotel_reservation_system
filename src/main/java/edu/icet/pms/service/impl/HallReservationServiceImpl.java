@@ -1,7 +1,7 @@
 package edu.icet.pms.service.impl;
 
 import edu.icet.pms.dao.HallReservationDao;
-import edu.icet.pms.dto.HallReservation;
+import edu.icet.pms.model.HallReservation;
 import edu.icet.pms.entity.HallReservationEntity;
 import edu.icet.pms.service.HallReservationService;
 import edu.icet.pms.util.composite_keys.HallReservationPK;
@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service

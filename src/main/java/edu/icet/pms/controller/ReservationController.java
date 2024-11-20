@@ -1,7 +1,6 @@
 package edu.icet.pms.controller;
 
-import edu.icet.pms.dto.Reservation;
-import edu.icet.pms.dto.Room;
+import edu.icet.pms.model.Reservation;
 import edu.icet.pms.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -48,13 +47,15 @@ public class ReservationController {
     }
 
     @GetMapping("/get")
-    public List<Room> getReservationsByFiltering(@RequestParam(required = false) String status,
-                                                 @RequestParam(required = false) String customerId,
-                                                 @RequestParam(required = false) String paymentCompleted
+    public List<Reservation> getReservationsByFiltering(@RequestParam(required = false) String status,
+                                                        @RequestParam(required = false) String customerId,
+                                                        @RequestParam(required = false) String paymentCompleted,
+                                                        @RequestParam(required = false) String resourceType
     ){
         return service.getReservationsByFiltering(
                 status,
                 customerId,
-                paymentCompleted == null? null : Boolean.parseBoolean(paymentCompleted));
+                paymentCompleted == null? null : Boolean.parseBoolean(paymentCompleted),
+                resourceType);
     }
 }

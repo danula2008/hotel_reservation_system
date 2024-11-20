@@ -1,6 +1,6 @@
 package edu.icet.pms.controller;
 
-import edu.icet.pms.dto.DayOutPackage;
+import edu.icet.pms.model.DayOutPackage;
 import edu.icet.pms.service.DayOutPackageService;
 import edu.icet.pms.util.ResponseMapping;
 import lombok.RequiredArgsConstructor;

@@ -30,4 +30,5 @@ public class ReservationEntity {
     private Boolean paymentCompleted;
     private LocalDateTime createdDateTime;
     private String specialRequests;
+    private String resourceType;
 }

@@ -1,7 +1,7 @@
 package edu.icet.pms.service.impl;
 
 import edu.icet.pms.dao.UserDao;
-import edu.icet.pms.dto.User;
+import edu.icet.pms.model.User;
 import edu.icet.pms.entity.UserEntity;
 import edu.icet.pms.service.UserService;
 import edu.icet.pms.util.HashPassword;

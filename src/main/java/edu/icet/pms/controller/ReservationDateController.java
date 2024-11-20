@@ -1,7 +1,7 @@
 package edu.icet.pms.controller;
 
-import edu.icet.pms.dto.ReservationDate;
-import edu.icet.pms.dto.ReservationDateForPost;
+import edu.icet.pms.model.ReservationDate;
+import edu.icet.pms.model.ReservationDateForPost;
 import edu.icet.pms.service.ReservationDateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

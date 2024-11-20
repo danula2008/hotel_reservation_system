@@ -1,6 +1,6 @@
 package edu.icet.pms.controller;
 
-import edu.icet.pms.dto.User;
+import edu.icet.pms.model.User;
 import edu.icet.pms.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

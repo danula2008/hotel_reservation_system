@@ -1,6 +1,6 @@
 package edu.icet.pms.service;
 
-import edu.icet.pms.dto.Room;
+import edu.icet.pms.model.Room;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package edu.icet.pms.service;
 
-import edu.icet.pms.dto.Hall;
+import edu.icet.pms.model.Hall;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package edu.icet.pms.controller;
 
-import edu.icet.pms.dto.DopReservation;
+import edu.icet.pms.model.DopReservation;
 import edu.icet.pms.service.DopReservationService;
 import edu.icet.pms.util.composite_keys.DopReservationPK;
 import lombok.RequiredArgsConstructor;

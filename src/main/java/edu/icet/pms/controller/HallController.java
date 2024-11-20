@@ -1,6 +1,6 @@
 package edu.icet.pms.controller;
 
-import edu.icet.pms.dto.Hall;
+import edu.icet.pms.model.Hall;
 import edu.icet.pms.service.HallService;
 import edu.icet.pms.util.ResponseMapping;
 import lombok.RequiredArgsConstructor;

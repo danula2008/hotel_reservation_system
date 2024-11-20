@@ -1,6 +1,6 @@
 package edu.icet.pms.controller;
 
-import edu.icet.pms.dto.Customer;
+import edu.icet.pms.model.Customer;
 import edu.icet.pms.service.CustomerService;
 import edu.icet.pms.util.ResponseMapping;
 import lombok.RequiredArgsConstructor;

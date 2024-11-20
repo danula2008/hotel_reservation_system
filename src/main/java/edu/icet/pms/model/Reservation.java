@@ -1,4 +1,4 @@
-package edu.icet.pms.dto;
+package edu.icet.pms.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,4 +21,5 @@ public class Reservation {
     private LocalDate createdDate;
     private LocalTime createdTime;
     private String specialRequests;
+    private String resourceType;
 }

@@ -1,6 +1,6 @@
 package edu.icet.pms.service;
 
-import edu.icet.pms.dto.DayOutPackage;
+import edu.icet.pms.model.DayOutPackage;
 import java.util.List;
 
 public interface DayOutPackageService {

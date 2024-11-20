@@ -1,7 +1,7 @@
 package edu.icet.pms.service.impl;
 
 import edu.icet.pms.dao.DopReservationDao;
-import edu.icet.pms.dto.DopReservation;
+import edu.icet.pms.model.DopReservation;
 import edu.icet.pms.entity.DopReservationEntity;
 import edu.icet.pms.service.DopReservationService;
 import edu.icet.pms.util.composite_keys.DopReservationPK;
@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service

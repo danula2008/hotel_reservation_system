@@ -1,7 +1,7 @@
 package edu.icet.pms.service.impl;
 
 import edu.icet.pms.dao.RoomDao;
-import edu.icet.pms.dto.Room;
+import edu.icet.pms.model.Room;
 import edu.icet.pms.entity.RoomEntity;
 import edu.icet.pms.service.RoomService;
 import jakarta.persistence.EntityManager;

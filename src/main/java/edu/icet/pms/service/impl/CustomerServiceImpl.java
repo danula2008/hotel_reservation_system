@@ -1,7 +1,7 @@
 package edu.icet.pms.service.impl;
 
 import edu.icet.pms.dao.CustomerDao;
-import edu.icet.pms.dto.Customer;
+import edu.icet.pms.model.Customer;
 import edu.icet.pms.entity.CustomerEntity;
 import edu.icet.pms.service.CustomerService;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package edu.icet.pms.service.impl;
 
 import edu.icet.pms.dao.DayOutPackageDao;
-import edu.icet.pms.dto.DayOutPackage;
+import edu.icet.pms.model.DayOutPackage;
 import edu.icet.pms.entity.DayOutPackageEntity;
 import edu.icet.pms.service.DayOutPackageService;
 import jakarta.persistence.EntityManager;

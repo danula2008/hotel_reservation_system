@@ -1,6 +1,6 @@
 package edu.icet.pms.controller;
 
-import edu.icet.pms.dto.RoomReservation;
+import edu.icet.pms.model.RoomReservation;
 import edu.icet.pms.service.RoomReservationService;
 import edu.icet.pms.util.composite_keys.RoomReservationPK;
 import lombok.RequiredArgsConstructor;

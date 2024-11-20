@@ -1,4 +1,4 @@
-package edu.icet.pms.dto;
+package edu.icet.pms.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

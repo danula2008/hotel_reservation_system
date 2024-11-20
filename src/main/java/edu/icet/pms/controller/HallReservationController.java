@@ -1,12 +1,12 @@
 package edu.icet.pms.controller;
 
-import edu.icet.pms.dto.HallReservation;
+import edu.icet.pms.model.HallReservation;
 import edu.icet.pms.service.HallReservationService;
 import edu.icet.pms.util.composite_keys.HallReservationPK;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import java.time.LocalDate;
+
 import java.util.List;
 
 @RestController

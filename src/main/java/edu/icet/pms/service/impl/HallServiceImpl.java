@@ -1,7 +1,7 @@
 package edu.icet.pms.service.impl;
 
 import edu.icet.pms.dao.HallDao;
-import edu.icet.pms.dto.Hall;
+import edu.icet.pms.model.Hall;
 import edu.icet.pms.entity.HallEntity;
 import edu.icet.pms.service.HallService;
 import jakarta.persistence.EntityManager;

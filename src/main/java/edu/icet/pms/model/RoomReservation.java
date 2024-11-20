@@ -1,4 +1,4 @@
-package edu.icet.pms.dto;
+package edu.icet.pms.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,8 +10,9 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReservationDate {
-    private String reservationId;
-    private String resourceId;
-    private LocalDate date;
+public class RoomReservation {
+    private String  reservationId;
+    private String roomId;
+    private LocalDate arrivalDate;
+    private LocalDate departureDate;
 }

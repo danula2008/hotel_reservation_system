@@ -1,7 +1,7 @@
 package edu.icet.pms.service;
 
-import edu.icet.pms.dto.ReservationDate;
-import edu.icet.pms.dto.ReservationDateForPost;
+import edu.icet.pms.model.ReservationDate;
+import edu.icet.pms.model.ReservationDateForPost;
 
 import java.time.LocalDate;
 import java.util.List;

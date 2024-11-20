@@ -1,6 +1,6 @@
 package edu.icet.pms.service;
 
-import edu.icet.pms.dto.Customer;
+import edu.icet.pms.model.Customer;
 
 import java.util.List;
 

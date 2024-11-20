@@ -1,8 +1,8 @@
 package edu.icet.pms.service.impl;
 
 import edu.icet.pms.dao.ReservationDateDao;
-import edu.icet.pms.dto.ReservationDate;
-import edu.icet.pms.dto.ReservationDateForPost;
+import edu.icet.pms.model.ReservationDate;
+import edu.icet.pms.model.ReservationDateForPost;
 import edu.icet.pms.entity.ReservationDateEntity;
 import edu.icet.pms.service.ReservationDateService;
 import lombok.RequiredArgsConstructor;
@@ -67,5 +67,4 @@ public class ReservationDateServiceImpl implements ReservationDateService {
         return Arrays.stream(dates)
                 .noneMatch(reservedDates::contains);
     }
-
 }

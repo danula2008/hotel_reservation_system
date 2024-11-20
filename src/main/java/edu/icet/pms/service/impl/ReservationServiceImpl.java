@@ -1,8 +1,8 @@
 package edu.icet.pms.service.impl;
 
 import edu.icet.pms.dao.ReservationDao;
-import edu.icet.pms.dto.Reservation;
-import edu.icet.pms.dto.Room;
+import edu.icet.pms.model.Reservation;
+import edu.icet.pms.model.Room;
 import edu.icet.pms.entity.ReservationEntity;
 import edu.icet.pms.entity.RoomEntity;
 import edu.icet.pms.service.ReservationService;
@@ -47,10 +47,10 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<Room> getReservationsByFiltering(String status, String customerId, Boolean paymentCompleted) {
+    public List<Reservation> getReservationsByFiltering(String status, String customerId, Boolean paymentCompleted,String resourceType) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<RoomEntity> criteriaQuery = criteriaBuilder.createQuery(RoomEntity.class);
-        Root<RoomEntity> root = criteriaQuery.from(RoomEntity.class);
+        CriteriaQuery<ReservationEntity> criteriaQuery = criteriaBuilder.createQuery(ReservationEntity.class);
+        Root<ReservationEntity> root = criteriaQuery.from(ReservationEntity.class);
 
         List<Predicate> predicates = new ArrayList<>();
 
@@ -63,8 +63,11 @@ public class ReservationServiceImpl implements ReservationService {
         if (paymentCompleted != null) {
             predicates.add(criteriaBuilder.equal(root.get("bedType"), paymentCompleted));
         }
+        if (resourceType != null) {
+            predicates.add(criteriaBuilder.equal(root.get("resourceType"), resourceType));
+        }
 
         criteriaQuery.where(criteriaBuilder.and(predicates.toArray(new Predicate[0])));
-        return entityManager.createQuery(criteriaQuery).getResultList().stream().map(roomEntity -> mapper.map(roomEntity, Room.class)).toList();
+        return entityManager.createQuery(criteriaQuery).getResultList().stream().map(reservationEntity -> mapper.map(reservationEntity, Reservation.class)).toList();
     }
 }

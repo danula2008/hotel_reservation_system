@@ -1,6 +1,6 @@
 package edu.icet.pms.service;
 
-import edu.icet.pms.dto.RoomReservation;
+import edu.icet.pms.model.RoomReservation;
 import edu.icet.pms.util.composite_keys.RoomReservationPK;
 import java.util.List;
 
